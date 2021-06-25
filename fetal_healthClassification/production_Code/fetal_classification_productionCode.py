@@ -113,7 +113,7 @@ class classification(preprocessing):
 
 if __name__ == "__main__":
     start_time = datetime.now()
-    print("Reading in the data file...")
+    print("\nReading in the data file...")
     df = pd.read_csv("../fetal_health.csv")
 
     obj1 = classification()
