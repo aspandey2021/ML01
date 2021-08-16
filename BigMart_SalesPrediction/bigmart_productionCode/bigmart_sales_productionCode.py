@@ -12,7 +12,7 @@ from modules.eda import *
 from modules.feat_engineering import *
 from modules.regression_training import *
 
-class bigmart_sales():
+class BigmartSales():
     print("Reading in the data file...")
     df = pd.read_csv("Sales_data.csv")
 
@@ -24,5 +24,5 @@ class bigmart_sales():
 
 if __name__ == "__main__":
     start_time = datetime.now()
-    bigmart_sales()
+    BigmartSales()
     print("___ Script took {} seconds ___".format(datetime.now() - start_time))
