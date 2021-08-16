@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder
 
-def feat_engineering(df):
+def featureEngineering(df):
     """
     performs feature engineering like one-hot encoding, log transformation on the dataframe
     :param df: dataframe
