@@ -5,7 +5,7 @@ from sklearn.model_selection import KFold, GridSearchCV,train_test_split
 from sklearn.metrics import r2_score,mean_squared_error
 from sklearn.ensemble import RandomForestRegressor
 
-def regression_training(df):
+def regressionTraining(df):
     """
     takes Random Forest model with the best parameters
     and trains on the whole data set and saves the model in a pickle file
@@ -13,9 +13,9 @@ def regression_training(df):
     :return: the trained model
     """
     # Storing all columns except the target column in a variable
-    feature_cols = [x for x in df.columns if x != 'Item_Outlet_Sales']
+    featureCols = [x for x in df.columns if x != 'Item_Outlet_Sales']
     # Split the data into train and test
-    x_train, x_test, y_train, y_test = train_test_split(df[feature_cols],
+    x_train, x_test, y_train, y_test = train_test_split(df[featureCols],
                                                         df['Item_Outlet_Sales'],
                                                         test_size=0.3,
                                                         random_state=42)
@@ -42,10 +42,10 @@ def regression_training(df):
     print("\n")
 
     # Feature Importances
-    feature_importances = pd.DataFrame(model.best_estimator_.feature_importances_,
+    featureImportances = pd.DataFrame(model.best_estimator_.feature_importances_,
                                        index=x_train.columns,
                                        columns=['importance']).sort_values('importance', ascending=False)
-    print(" Top 5 feature importances:\n",feature_importances.head(5))
+    print(" Top 5 feature importances:\n",featureImportances.head(5))
 
     print(" Training completed")
 
