@@ -16,10 +16,10 @@ class BigmartSales():
     print("Reading in the data file...")
     df = pd.read_csv("Sales_data.csv")
 
-    df_pre = preprocess(df)
-    df_eda = exploratory_analysis(df_pre)
-    df_feat = feat_engineering(df_eda)
-    regression_training(df_feat)
+    df_pre = preProcess(df)
+    df_eda = exploratoryAnalysis(df_pre)
+    df_feat = featureEngineering(df_eda)
+    regressionTraining(df_feat)
 
 
 if __name__ == "__main__":
