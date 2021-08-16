@@ -1,5 +1,5 @@
 
-def exploratory_analysis(df):
+def exploratoryAnalysis(df):
     """
     performs exploratory data analysis
     :param df: dataframe
