@@ -7,12 +7,12 @@ metrics and save the model in a pickle file.
 """
 
 from datetime import datetime
-import math, pickle, warnings
+import pickle, warnings
 import pandas as pd
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.metrics import classification_report, accuracy_score, precision_recall_fscore_support as score, \
     roc_auc_score
-from xgboost import XGBClassifier
+from sklearn.ensemble import RandomForestClassifier
 warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
@@ -38,7 +38,7 @@ class Preprocessing():
 class Classification(Preprocessing):
 
     def __init__(self):
-        self.name = "Xgboost"
+        self.name = "Random Forest Classifier"
 
     # This function splits the data into train and test sets
     def splitData(self, df):
@@ -82,15 +82,9 @@ class Classification(Preprocessing):
         targetNames = ['class 1', 'class 2', 'class 3']
 
         # Defining the Model parameters
-        model = XGBClassifier(base_score=0.5, booster='dart', colsample_bylevel=1,
-                              colsample_bynode=1, colsample_bytree=1, eval_metric='mlogloss',
-                              gamma=0, gpu_id=-1, importance_type='gain',
-                              interaction_constraints='', learning_rate=0.1, max_delta_step=0,
-                              max_depth=5, min_child_weight=1, missing=math.nan,
-                              monotone_constraints='()', n_estimators=50, n_jobs=-1,
-                              num_parallel_tree=1, objective='multi:softprob', random_state=42,
-                              reg_alpha=0, reg_lambda=1, scale_pos_weight=None, subsample=0.5,
-                              tree_method='auto', validate_parameters=1, verbosity=None)
+        model = RandomForestClassifier(class_weight='balanced', criterion='entropy',
+                       n_estimators=300, n_jobs=-1, random_state=42,
+                       warm_start=True)
 
         # Training the model and predicting
         print("\n-----------------\n")
@@ -105,7 +99,7 @@ class Classification(Preprocessing):
 
         # Saving the file
         print("\nSaving File to disk...")
-        with open("fetal_classification_trained_model.pickle", 'wb') as fp:
+        with open("../fetal_classification_trained_model.pickle", 'wb') as fp:
             pickle.dump(model, fp)
 
         print("\n...Process Finished")
